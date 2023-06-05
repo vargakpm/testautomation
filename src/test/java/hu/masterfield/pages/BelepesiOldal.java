@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BelepesiOldal extends BasePage {
 
+    String emailcim = "vargakpm@freemail.hu";
+    String jelszo = "Tesco0000";
+
 // A weboldalon lévő elemek kikeresése és példányositása
 
     @FindBy(id = "email")
@@ -26,20 +29,13 @@ public class BelepesiOldal extends BasePage {
 
 // Műveleteket végző függvények
 
-    public void belepes() {
-        emailCimMezo.sendKeys("");
-        jelszoMezo.sendKeys("");
-        belepesGomb.click();
+    public VasarlasKezdoOldal belepes() {
         assertTrue(isLoaded(belepesGomb));
-    }
+        emailCimMezo.sendKeys(emailcim);
+        jelszoMezo.sendKeys(jelszo);
+        belepesGomb.click();
 
- /*   public TermekvalasztasOldal belepteto() {  // cookie elfogadó függvény
-        usernameMezo.sendKeys("standard_user");
-        passwordMezo.sendKeys("secret_sauce");
-        loginGomb.click();
-
-        return new TermekvalasztasOldal(driver);  // navigate to termék lista
+        return new VasarlasKezdoOldal(driver);  // navigate to termék lista
     }
-*/
 
 }
