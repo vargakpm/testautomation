@@ -73,7 +73,7 @@ public class BelepesSteps {
     @When("Megadom emailCim {string} es jelszo {string}")
     public void megadomEmailCimEsJelszo(String emailCim, String jelszo) {
         BelepesiOldal belepesiOldal = new BelepesiOldal(driver);
-        belepesiOldal.belepes("vargakpm@freemail.hu","Tesco0000");
+        belepesiOldal.belepes(emailCim, jelszo);
     }
 
     @Then("A rendszer beleptetet a fiokomba")
@@ -83,8 +83,14 @@ public class BelepesSteps {
     }
 
     @Then("A rendszer {string} hibauzenetet ad")
-    public void aRendszerHibauzenetetAd(String arg0) {
+    public void aRendszerHibauzenetetAd(String elvartHibauzi) {
         BelepesiOldal belepesiOldal = new BelepesiOldal(driver);
+        if (elvartHibauzi.contains("Sajnos")) {
+            belepesiOldal.hibauzenetEllenorzesHibasEmailJelszo(elvartHibauzi);
+        }
+        if (elvartHibauzi.contains("adj meg egy")) {
+            belepesiOldal.hibauzenetEllenorzesHianyzoEmail(elvartHibauzi);
+        }
     }
 
     @And("a belepesi adatok megadasanal maradok")

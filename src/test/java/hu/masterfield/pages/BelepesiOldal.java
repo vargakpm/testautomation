@@ -29,7 +29,7 @@ public class BelepesiOldal extends BasePage {
     @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[1]/section/div/form/ul/li[1]/div/div/ul/li")
     WebElement hibauziHianyzoEmail;
 
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[1]/section/div/div/span/text()")
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[1]/section/div/div/span")
     WebElement hibauziEmailVagyJelszoRossz;
 
 
@@ -59,7 +59,7 @@ public class BelepesiOldal extends BasePage {
     }
 
     public void hibauzenetEllenorzesHibasEmailJelszo(String vartHibaUzenet) {    // hibás email cim vagy jelszó esetén helyes hibaüzenet jelenik meg?
-        assertEquals(hibauziHianyzoEmail.getText(), vartHibaUzenet);
+        assertEquals(hibauziEmailVagyJelszoRossz.getText(), vartHibaUzenet);
     }
 
     public VasarlasKezdoOldal belepes(String emailcim, String jelszo) {  // A Webáruházba való belépés végrehajtása
