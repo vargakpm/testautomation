@@ -23,7 +23,7 @@ public class KezdoOldal extends BasePage {
 
 // Műveleteket végző függvények
 
-    public void megnyito() {   // Belépési oldalra-re navigálás
+    public void megnyito() {   // Kezdő oldalra navigálás
         driver.get("https://bevasarlas.tesco.hu/groceries/hu-HU");
         assertTrue(isLoaded(acceptAllCookies));
     }

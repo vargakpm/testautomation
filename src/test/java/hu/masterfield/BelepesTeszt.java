@@ -13,7 +13,7 @@ public class BelepesTeszt extends BaseTest {
 
     @Test
     @DisplayName("Tesco webáruház teszt")
-    public void vasarlasTeszt() throws InterruptedException {
+    public void belepesTeszt() throws InterruptedException {
 
         // Tesco Webshop kezdőoldal megnyitasa
         KezdoOldal kezdoOldal = new KezdoOldal(driver);
@@ -22,9 +22,9 @@ public class BelepesTeszt extends BaseTest {
 
         // belépés a Tesco Webshopba
         BelepesiOldal belepesiOldal = new BelepesiOldal(driver);
-        belepesiOldal.belepes();
+        belepesiOldal.belepes("vargakpm@freemail.hu","Tesco0000");
 
-        // belépés sikerességének elllenőrzése
+        // belépés sikerességének ellenőrzése
         VasarlasKezdoOldal vasarlasKezdoOldal = new VasarlasKezdoOldal(driver);
         vasarlasKezdoOldal.belepesSikeres();
          }

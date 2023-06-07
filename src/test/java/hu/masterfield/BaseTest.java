@@ -37,11 +37,10 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    /*
     @AfterAll
     public static void cleanup() {
         driver.quit();  // drivek-t kilövi, a böngésző ablakot bezárja
     }
-    */
+
 
 }
