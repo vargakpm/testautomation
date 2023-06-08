@@ -2,8 +2,7 @@
 Feature: Én, mint a Tesco online vásárlója, egy adott terméket szeretnék kikeresni az áruházban, hogy azt a kosaramba tudjam rakni.
 
   Background:
-    Given Az "email_cim" es "jelszo" megadása utani nyito oldalon vagyok
-    And cookie-k el vannak fogadva
+    Given A "vargakpm@freemail.hu" es "Tesco0000" megadása utani nyito oldalon vagyok
 
   Rule: Létező termék keresése esetén feljön a találati lista
 
@@ -11,8 +10,8 @@ Feature: Én, mint a Tesco online vásárlója, egy adott terméket szeretnék k
       When A keresoben megadom "<keresendo>" termeknev
       Then Megjelenik a talalati lista
       Examples:
-        | keresendo         | email_cim            | jelszo    |
-        | Univer ketchup | vargakpm@freemail.hu | Tesco0000 |
+        | keresendo         |
+        | Univer ketchup |
 
     Scenario Outline: Konkret termek keresese eseten csak az van a talalati listaban
       When A keresoben megadom "<keresendo>" termeknev

@@ -114,25 +114,22 @@ public class TESCOTesztSteps {
         screenshootFileName = "BelepesiOldalnalMarad";
     }
 
-    @Given("A belepes utani nyito oldalon vagyok")
+    @Given("A {string} es {string} megadása utani nyito oldalon vagyok")
     public void aBelepesUtaniNyitoOldalonVagyok(String emailCim, String jelszo) {
-       VasarlasKezdoOldal vasarlasKezdoOldal = new VasarlasKezdoOldal(driver);
-       vasarlasKezdoOldal.belepesSikeres();
-       //
         aBelepesiOldalonVagyok();
         cookiekElVannakFogadva();
         megadomEmailCimEsJelszo(emailCim, jelszo);
-        //  ???????????????????????????????????????
         aRendszerBeleptetetAFiokomba();
         screenshootFileName = "BelepveFiokba2";
+
+        VasarlasKezdoOldal vasarlasKezdoOldal = new VasarlasKezdoOldal(driver);
+        vasarlasKezdoOldal.belepesSikeres();
     }
 
     @When("A keresoben megadom {string} termeknev")
     public void aKeresobenMegadomTermeknev(String keresendo) {
         VasarlasKezdoOldal vasarlasKezdoOldal = new VasarlasKezdoOldal(driver);
         vasarlasKezdoOldal.kereses(keresendo);
-
-
         screenshootFileName = "KeresokiefejezesMegadva";
     }
 
@@ -140,14 +137,16 @@ public class TESCOTesztSteps {
     public void megjelenikATalalatiLista() {
         KeresesiEredmenyOldal keresesiEredmenyOldal= new KeresesiEredmenyOldal(driver);
         keresesiEredmenyOldal.keresesSikeres();
-
         screenshootFileName = "TalalatiLista";
     }
 
     @Then("Megjelenik nem letezo termeknev uzenet")
     public void megjelenikNemLetezoTermeknevUzenet() {
-
+        KeresesiEredmenyOldal keresesiEredmenyOldal= new KeresesiEredmenyOldal(driver);
+        keresesiEredmenyOldal.nincsTalalat();
 
         screenshootFileName = "UresTalalatiLista";
     }
+
+
 }

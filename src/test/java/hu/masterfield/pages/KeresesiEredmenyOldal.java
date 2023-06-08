@@ -13,6 +13,8 @@ public class KeresesiEredmenyOldal extends BasePage {
     @FindBy(className = "instructions-label")  // "Rendezés szempontja:" szöveg
     WebElement rendezes;
 
+    @FindBy(className = "empty-section--empty-text")  // "Sajnos nem található ..." szövegRÉSZ
+    WebElement sajnosSzoveg;
 
     // konstruktor
     public KeresesiEredmenyOldal(WebDriver driver) {   // ez a konstruktor
@@ -25,11 +27,9 @@ public class KeresesiEredmenyOldal extends BasePage {
         assertTrue(isLoaded(rendezes));
     }
 
- /*   public void kereses(String keresendo) {
-        keresoMezo.sendKeys(keresendo + Keys.ENTER);
-        assertTrue(isLoaded(keresoMezo));
-        return new KeresesiEredmenyOldal(driver);
+    public void nincsTalalat() {
+        assertTrue(isLoaded(sajnosSzoveg));
     }
-*/
+
 
 }
