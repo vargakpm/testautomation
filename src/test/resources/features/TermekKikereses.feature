@@ -11,7 +11,7 @@ Feature: Én, mint a Tesco online vásárlója, egy adott terméket szeretnék k
       When A keresoben megadom "<termek>" termeknev
       Then Megjelenik a talalati lista
       Examples:
-        | termek              |
+        | termek         |
         | Univer ketchup |
 
     Scenario Outline: Konkret termek keresese eseten csak az van a talalati listaban

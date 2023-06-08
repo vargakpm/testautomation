@@ -4,6 +4,7 @@ import hu.masterfield.Utils;
 import hu.masterfield.pages.BelepesiOldal;
 import hu.masterfield.pages.VasarlasKezdoOldal;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
@@ -31,6 +32,8 @@ public class BelepesSteps {
 
     public static Logger log = LogManager.getLogger();
 
+    String screenshootFileName;
+
     @Before // cucumber annotáció
     public static void setup() throws IOException {
         WebDriverManager.chromedriver().setup();
@@ -55,10 +58,10 @@ public class BelepesSteps {
         driver.quit();
     }
 
-    @BeforeStep   // lépések előtt
+    @AfterStep   // lépések előtt
     public void screenshot() {
         log.info("Take screenshot");   // log-ba irni ezt
-        Utils.takeSnapShot(driver);   // képernyőkép készitése
+        Utils.takeSnapShot(driver, screenshootFileName);   // képernyőkép készitése
     }
 
 
@@ -68,24 +71,28 @@ public class BelepesSteps {
     public void aBelepesiOldalonVagyok() {
         BelepesiOldal belepesiOldal = new BelepesiOldal(driver);
         belepesiOldal.oldalMegnyito();
+        screenshootFileName = "BelepesiOldal";
     }
 
     @And("cookie-k el vannak fogadva")
     public void cookiekElVannakFogadva() {
         BelepesiOldal belepesiOldal = new BelepesiOldal(driver);
         belepesiOldal.cookieElfogado();
+        screenshootFileName = "CookieElfogadva";
     }
 
     @When("Megadom emailCim {string} es jelszo {string}")
     public void megadomEmailCimEsJelszo(String emailCim, String jelszo) {
         BelepesiOldal belepesiOldal = new BelepesiOldal(driver);
         belepesiOldal.belepes(emailCim, jelszo);
+        screenshootFileName = "EmailEsJelszoMegadva";
     }
 
     @Then("A rendszer beleptetet a fiokomba")
     public void aRendszerBeleptetetAFiokomba() {
         VasarlasKezdoOldal vasarlasKezdoOldal = new VasarlasKezdoOldal(driver);
         vasarlasKezdoOldal.belepesSikeres();
+        screenshootFileName = "BelepveFiokba";
     }
 
     @Then("A rendszer {string} hibauzenetet ad")
@@ -97,13 +104,34 @@ public class BelepesSteps {
         if (elvartHibauzi.contains("adj meg egy")) {
             belepesiOldal.hibauzenetEllenorzesHianyzoEmail(elvartHibauzi);
         }
+        screenshootFileName = "oladlonHibauzenet";
     }
 
     @And("a belepesi adatok megadasanal maradok")
     public void aBelepesiAdatokMegadasanalMaradok() {
         BelepesiOldal belepesiOldal = new BelepesiOldal(driver);
         belepesiOldal.belepesOldalEllenorzes();
+        screenshootFileName = "BelepesiOldalnalMarad";
     }
 
+    @Given("A belepes utani nyito oldalon vagyok")
+    public void aBelepesUtaniNyitoOldalonVagyok() {
+        aBelepesiOldalonVagyok();
+        cookiekElVannakFogadva();
+        megadomEmailCimEsJelszo(String emailCim, String jelszo ");
+        //  ???????????????????????????????????????
+        aRendszerBeleptetetAFiokomba();
+    }
 
+    @When("A keresoben megadom {string} termeknev")
+    public void aKeresobenMegadomTermeknev(String arg0) {
+    }
+
+    @Then("Megjelenik a talalati lista")
+    public void megjelenikATalalatiLista() {
+    }
+
+    @Then("Megjelenik nem letezo termeknev uzenet")
+    public void megjelenikNemLetezoTermeknevUzenet() {
+    }
 }

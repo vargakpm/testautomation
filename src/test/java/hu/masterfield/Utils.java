@@ -10,12 +10,12 @@ import java.io.IOException;
 
 public class Utils {
     private static int seq = 1;
-    private static final String fileNamePrefix = "target/screenshots/screen_";
+    private static final String fileNamePrefix = "target/screenshots/";
 
-    public static void takeSnapShot(WebDriver webdriver) {
+    public static void takeSnapShot(WebDriver webdriver, String screenshootFajlNev) {
         TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-        File DestFile = new File(fileNamePrefix + seq + ".png");
+        File DestFile = new File(fileNamePrefix + screenshootFajlNev + ".png");
         System.out.println("Taking screenshot " + fileNamePrefix + seq + ".png");
         try {
             FileUtils.copyFile(SrcFile, DestFile);
