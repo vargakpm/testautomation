@@ -2,11 +2,11 @@ package hu.masterfield.steps;
 
 import hu.masterfield.Utils;
 import hu.masterfield.pages.BelepesiOldal;
+import hu.masterfield.pages.KeresesiEredmenyOldal;
 import hu.masterfield.pages.VasarlasKezdoOldal;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.util.Properties;
 
-public class BelepesSteps {
+public class TESCOTesztSteps {
 
     protected static WebDriver driver;
 
@@ -40,7 +40,7 @@ public class BelepesSteps {
 
         // loading arguments, properties
         Properties props = new Properties(); // java.util
-        InputStream is = BelepesSteps.class.getResourceAsStream("/browser.properties");
+        InputStream is = TESCOTesztSteps.class.getResourceAsStream("/browser.properties");
         props.load(is);
 
         // set chrome options
@@ -115,23 +115,39 @@ public class BelepesSteps {
     }
 
     @Given("A belepes utani nyito oldalon vagyok")
-    public void aBelepesUtaniNyitoOldalonVagyok() {
+    public void aBelepesUtaniNyitoOldalonVagyok(String emailCim, String jelszo) {
+       VasarlasKezdoOldal vasarlasKezdoOldal = new VasarlasKezdoOldal(driver);
+       vasarlasKezdoOldal.belepesSikeres();
+       //
         aBelepesiOldalonVagyok();
         cookiekElVannakFogadva();
-        megadomEmailCimEsJelszo(String emailCim, String jelszo ");
+        megadomEmailCimEsJelszo(emailCim, jelszo);
         //  ???????????????????????????????????????
         aRendszerBeleptetetAFiokomba();
+        screenshootFileName = "BelepveFiokba2";
     }
 
     @When("A keresoben megadom {string} termeknev")
-    public void aKeresobenMegadomTermeknev(String arg0) {
+    public void aKeresobenMegadomTermeknev(String keresendo) {
+        VasarlasKezdoOldal vasarlasKezdoOldal = new VasarlasKezdoOldal(driver);
+        vasarlasKezdoOldal.kereses(keresendo);
+
+
+        screenshootFileName = "KeresokiefejezesMegadva";
     }
 
     @Then("Megjelenik a talalati lista")
     public void megjelenikATalalatiLista() {
+        KeresesiEredmenyOldal keresesiEredmenyOldal= new KeresesiEredmenyOldal(driver);
+        keresesiEredmenyOldal.keresesSikeres();
+
+        screenshootFileName = "TalalatiLista";
     }
 
     @Then("Megjelenik nem letezo termeknev uzenet")
     public void megjelenikNemLetezoTermeknevUzenet() {
+
+
+        screenshootFileName = "UresTalalatiLista";
     }
 }

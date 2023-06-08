@@ -1,5 +1,6 @@
 package hu.masterfield.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +13,12 @@ public class VasarlasKezdoOldal extends BasePage {
     @FindBy(id = "utility-header-greetings")
     WebElement udvozles;
 
+    @FindBy(id = "search-input")
+    WebElement keresoMezo;
+
+
+
+
 // konstruktor
     public VasarlasKezdoOldal(WebDriver driver) {   // ez a konstruktor
         super(driver);
@@ -21,6 +28,12 @@ public class VasarlasKezdoOldal extends BasePage {
 
     public void belepesSikeres() {
         assertTrue(isLoaded(udvozles));
+    }
+
+    public KeresesiEredmenyOldal kereses(String keresendo) {
+        keresoMezo.sendKeys(keresendo + Keys.ENTER);
+        assertTrue(isLoaded(keresoMezo));
+        return new KeresesiEredmenyOldal(driver);
     }
 
 }
