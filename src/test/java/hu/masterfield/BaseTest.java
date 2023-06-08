@@ -42,5 +42,4 @@ public class BaseTest {
         driver.quit();  // drivek-t kilövi, a böngésző ablakot bezárja
     }
 
-
 }

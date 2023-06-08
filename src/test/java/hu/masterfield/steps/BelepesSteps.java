@@ -1,9 +1,11 @@
 package hu.masterfield.steps;
 
+import hu.masterfield.Utils;
 import hu.masterfield.pages.BelepesiOldal;
 import hu.masterfield.pages.VasarlasKezdoOldal;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -45,18 +47,22 @@ public class BelepesSteps {
         // init driver
         driver = new ChromeDriver(chromeOptions);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
         driver.manage().window().maximize();
     }
 
-    @After
+    @After  // böngésző bezárása
     public static void cleanup() {
         driver.quit();
     }
 
+    @BeforeStep   // lépések előtt
+    public void screenshot() {
+        log.info("Take screenshot");   // log-ba irni ezt
+        Utils.takeSnapShot(driver);   // képernyőkép készitése
+    }
 
 
-// *******************************************************************
+    // Step-ek definiálása:
 
     @Given("A belepesi oldalon vagyok")
     public void aBelepesiOldalonVagyok() {
